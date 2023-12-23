@@ -41,7 +41,7 @@ const MessageInput:React.FC<MessageInputProps> = ({
       <div className="p-5 border flex w-full justify-center items-center">
         <div className="flex w-full gap-x-10 items-center">
           <div className="w-[10%] text-center">
-            <div className=''>
+            {/* <div className=''>
                <UploadButton
                appearance={{
                  button:{
@@ -55,7 +55,7 @@ const MessageInput:React.FC<MessageInputProps> = ({
                 }}
                 onUploadError={(error:Error)=>console.log(error)}
                />
-            </div>
+            </div> */}
           </div>
 
           <div className="w-[70%]">
@@ -69,7 +69,7 @@ const MessageInput:React.FC<MessageInputProps> = ({
 
           <button
             onClick={() => onSend()}
-            disabled={text.length === 0 || media.length===0}
+            disabled={text.length === 0}
             className="w-fit"
           >
             <SendIcon />
