@@ -3,6 +3,7 @@ import Header from "./_components/Header";
 import Sidebar from "./_components/Sidebar";
 import Toolbar from "./_components/Toolbar";
 import MobileToolBar from "./_components/MobileToolbar";
+import getConversations from "@/lib/getConversations";
 
 
 
@@ -12,8 +13,13 @@ const DashboardLayout =async ({children}:{
     
     const users = await db.user.findMany({})
   
+    const conversations = await getConversations()
+
+    
 
 
+
+  
     return (
       <div className="w-full flex ">
         
@@ -25,14 +31,15 @@ const DashboardLayout =async ({children}:{
             <div className="w-[20vw] hidden lg:block">
               <Sidebar
                users={users}
+               conversations={conversations}
               />
             </div>
         </div>
 
         <div>
-          <div className="fixed w-full top-0 z-50 overflow-visible">
-            <Header isBack />
-          </div>
+
+          
+
           <main className="absolute top-[68px]">
               {children}
           </main>

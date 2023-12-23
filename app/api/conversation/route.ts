@@ -100,6 +100,9 @@ export async function GET(
         id:{
           in:conversationIds
         }
+      },
+      orderBy:{
+        lastMessageAt:'desc'
       }
     })
 

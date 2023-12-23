@@ -1,9 +1,10 @@
 import React from 'react'
+import Header from '../_components/Header'
 
 const page = () => {
   return (
     <div className='w-full h-full  bg-red-500'>
-      Users Page
+      <Header isBack/>
     </div>
   )
 }

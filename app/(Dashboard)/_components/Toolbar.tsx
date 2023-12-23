@@ -10,10 +10,6 @@ const IconMap = [
     url: "/",
   },
   {
-    Icon: Bell,
-    url: "/notifications",
-  },
-  {
     Icon: Users,
     url: "/users",
   },
@@ -23,7 +19,7 @@ const Toolbar = () => {
   const pathname = usePathname();
 
 
-  const isActive = true;
+ 
   return (
     <div className="px-5 h-full border-r flex items-center  my-auto">
       <div className="p-2 h-[70vh] flex flex-col justify-evenly  ">
@@ -39,9 +35,9 @@ const Toolbar = () => {
           ))}
         </div>
 
-        <div className="h-[10vh] cursor-pointer transition hover:text-slate-600 mt-20">
+        {/* <div className="h-[10vh] cursor-pointer transition hover:text-slate-600 mt-20">
           <Settings />
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -80,3 +80,5 @@ body{
   color: black;
   @apply bg-[#F5F5F5]
 }
+
+@import "~@uploadthing/react/styles.css"

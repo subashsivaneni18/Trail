@@ -21,27 +21,33 @@ const IconMap = [
 
 const MobileToolBar = () => {
   const pathname = usePathname();
+  const isConversationPage = pathname.includes('/conversation')
+  const isUsersPage = pathname==='/users'
+  const isHomePage = pathname==='/'
 
-  const isActive = true;
   return (
-    <div className="p-5 flex justify-center w-full">
-      <div className="flex gap-x-8 justify-evenly w-[100%]">
-        <div>
-          <UserButton afterSignOutUrl="/" />
+    <>
+      {(isUsersPage || isHomePage) && (
+        <div className="p-5 flex justify-center w-full border">
+          <div className="flex gap-x-8 justify-evenly w-[100%]">
+            <div>
+              <UserButton afterSignOutUrl="/" />
+            </div>
+            {IconMap.map((i) => (
+              <ToolbarIcon
+                icon={i.Icon}
+                url={i.url}
+                key={i.url}
+                isActive={i.url === pathname}
+              />
+            ))}
+            <div>
+              <Settings />
+            </div>
+          </div>
         </div>
-        {IconMap.map((i) => (
-          <ToolbarIcon
-            icon={i.Icon}
-            url={i.url}
-            key={i.url}
-            isActive={i.url === pathname}
-          />
-        ))}
-        <div>
-          <Settings />
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

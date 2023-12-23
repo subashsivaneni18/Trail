@@ -7,16 +7,19 @@ import { usePathname, useRouter } from "next/navigation";
 import { Conversation, User } from "@prisma/client";
 import { useAuth } from "@clerk/nextjs";
 import axios from "axios";
+import ConversationUser from "@/types/types";
 
 
 
 interface SideBarProps{
   users?:User[]
+  conversations:ConversationUser[]
 }
 
 
 const Sidebar:React.FC<SideBarProps> = ({
-  users
+  users,
+  conversations
 }) => {
   const pathname = usePathname();
   const isUsersPage = pathname.includes("/users");
@@ -24,24 +27,7 @@ const Sidebar:React.FC<SideBarProps> = ({
   const isHomePage = pathname === "/";
   const {userId} = useAuth()
 
-  const [OppositeUsers, setOppositeUsers] = useState<User[]>()
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/api/conversation");
-        setOppositeUsers(response.data);
-      } catch (error) {
-        console.error("Error fetching conversations:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  
-
-  
   return (
     <div className="border-r h-full flex items-center justify-center relative">
       <div className="h-[95%] flex flex-col">
@@ -91,20 +77,18 @@ const Sidebar:React.FC<SideBarProps> = ({
             </div>
           )}
 
-          {(isHomePage || isConversationPage) && (
-            <div>
-              {OppositeUsers?.filter((user) => user.userId!==userId).map((x) =>(
-                <div key={x.id}>
-                  <ChatCard
-                    id={x.id}
-                    username={x.name}
-                    imgUrl={x.imageUrl}
-                    key={x.id}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+
+          {(isHomePage || isConversationPage) &&
+            conversations.map((conversation) => (
+              <ChatCard
+                key={conversation.id}
+                id={conversation.id}
+                imgUrl={conversation.imageUrl}
+                username={conversation.name}
+                lastMessadeAt={conversation.lastMessageAt}
+                lastmessage={conversation.lastMessage}
+              />
+            ))}
         </div>
       </div>
     </div>
